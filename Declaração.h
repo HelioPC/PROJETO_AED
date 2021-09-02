@@ -1,23 +1,19 @@
 /*ESCREVA AQUI AS INSTRUÇÕES DE PRÉ-PROCESSAMENTO (INCLUDES E DEFINES)*/
 
-#ifndef _DEC_H_
+#ifndef __DEC_H__
 	#include <stdio.h>
 	#include <stdlib.h>
-	#include <ctype.h>
-	#include <string.h>
-	#include <locale.h>
-	#include <time.h>
-	#define _DEC_H_
+	#define __DEC_H__
 	#define MAX 150
 	#define BANO "BANO"
 	
 	#ifdef __unix__
 		#define limpa "clear"
-		#define pause "read -s -k \"?Press any key to continue...\""
+		#define _pause() getchar()
 	#else
 		#include <windows.h>
 		#define limpa "cls"
-		#define pause "pause"
+		#define _pause() system("pause")
 	#endif
 	
 	/*ESCREVA AQUI OS TIPOS, ESTRUTURAS, VARIÁVEIS GLOBAIS*/
@@ -73,12 +69,6 @@
 			CONTA_KID kid[MAX];
 			int qt;
 		}LISTA_KID;
-
-		/*Variáveis Globais*/
-		LISTACLI *LCL;
-		LISTAHIST *LHS;
-		LISTA_KID *LKD;
-		/*Fim De Variáveis Globais*/
 	#endif
 	/*Fim De Definição De Tipos*/
 	
@@ -86,24 +76,26 @@
 	
 	/*Protótipos Das Listas Ligadas (e duplamente e seus nós)*/
 	#ifdef __LL_FUNC__
-		void iniLCLI(void);
-		int tam(void);
-		int vazia(void);
+		void iniLCLI();
+		int tam();
+		int vazia();
 		int inserirI(CLI cli);
 		int inserirF(CLI cli);
 		int inserirK(CLI cli, int k);
-		int removeI(void);
-		int removeF(void);
+		int removeI();
+		int removeF();
 		int inserirI2(LISTACLI *lc, CLI cli);
 		int removeK(char *n_conta);
 		int getCLI_pos(CLI cl);
 		int is_CLI_in(char *n_conta);
 		int is_CLI_in2(LISTACLI *lc, CLI cli);
 		int is_CLI_in3(char *n_bi);
-		
-		void iniLHIST(void);
-		int tamLH(void);
-		int vaziaLH(void);
+	#endif
+
+	#ifdef __LDL_FUNC__
+		void iniLHIST();
+		int tamLH();
+		int vaziaLH();
 		int inserirF_LH(HIST h);
 		int qtHIST(CLI *cl);
 	#endif
@@ -111,15 +103,15 @@
 	
 	/*Protótipos Das Listas Sequenciais*/
 	#ifdef __LS_FUNC__
-		void iniLKID(void);
-		int tam_KID(void);
-		int vazia_KID(void);
-		int cheio_KID(void);
+		void iniLKID();
+		int tam_KID();
+		int vazia_KID();
+		int cheio_KID();
 		int inserirI_KID(CONTA_KID ck);
 		int inserirF_KID(CONTA_KID ck);
 		int inserirK_KID(CONTA_KID ck, int k);
-		int removeI_KID(void);
-		int removeF_KID(void);
+		int removeI_KID();
+		int removeF_KID();
 		int removeK_KID(int k);
 		int rmKID(char *n_conta);
 		int is_KID_in(char *ced);
@@ -128,7 +120,7 @@
 	
 	/*Protótipos De Data*/
 	#ifdef __DT_FUNC__
-		DATA criaData(void);
+		DATA criaData();
 		DATA strToData(char *s);
 		int bissexto(int ano);
 		int isData(DATA d);
@@ -142,7 +134,7 @@
 		CLI iniCli(char *nome, DATA nasc, long int tel, double val, char *bi,
 		char *n_cont, char gen, DATA d);
 		CLI *getCLI(char *n_conta);
-		void mostraCLI(void);
+		void mostraCLI();
 		void _mostraCLI(CLI *cl);
 		void mostraCLI_by_DATA(DATA d);
 		void mostraCLI_idade(unsigned short int x, unsigned short int y);
@@ -155,10 +147,10 @@
 		int temKID(CLI *cl);
 		int qtKID(CLI *cl);
 		void cli_n_KID(unsigned short int n);
-		void rank_mais_act(void);
+		void rank_mais_act();
 		int valor_menor_n(double v);
-		void mostraCLI_alf(void);
-		void abreConta(void);
+		void mostraCLI_alf();
+		void abreConta();
 		void abreContaKid(CLI *cl);
 		void debitar_ALL();
 	#endif
@@ -169,7 +161,7 @@
 		CONTA_KID iniKID(char nome[80], char *n_ced, char gen, long int tel,
 		double val, char *n_conta, DATA dat_n, DATA d, unsigned short int i);
 		CONTA_KID *getKID(char *ced);
-		void mostraKID(void);
+		void mostraKID();
 	#endif
 	/*Fim de Protótipos de Conta Kid*/
 	
@@ -183,8 +175,8 @@
 	
 	/*Outros Protótipos*/
 	#ifdef __MN_FUNC__
-		void menu(void);
-		void menuSys(void);
+		void menu();
+		void menuSys();
 		void menuCli(CLI *cl);
 		void menuHist(CLI *cl);
 	#endif
