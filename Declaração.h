@@ -42,7 +42,7 @@
 		
 		typedef struct{
 			char n_conta[15];
-			char tipo[MAX];
+			char tipo[MAX*2];
 			DATA data;
 		}HIST;
 		
@@ -75,15 +75,16 @@
 	/*Definição De Protótipos*/
 	
 	/*Protótipos Das Listas Ligadas (e duplamente e seus nós)*/
-	#ifdef __LL_FUNC__
+	#ifdef __INI_FUNC__
 		void iniLCLI();
+		void iniLHIST();
+		void iniLKID();
+	#endif
+
+	#ifdef __LL_FUNC__
 		int tam();
 		int vazia();
-		int inserirI(CLI cli);
-		int inserirF(CLI cli);
-		int inserirK(CLI cli, int k);
-		int removeI();
-		int removeF();
+		int inserirK(CLI cli);
 		int inserirI2(LISTACLI *lc, CLI cli);
 		int removeK(char *n_conta);
 		int getCLI_pos(CLI cl);
@@ -93,7 +94,6 @@
 	#endif
 
 	#ifdef __LDL_FUNC__
-		void iniLHIST();
 		int tamLH();
 		int vaziaLH();
 		int inserirF_LH(HIST h);
@@ -103,7 +103,6 @@
 	
 	/*Protótipos Das Listas Sequenciais*/
 	#ifdef __LS_FUNC__
-		void iniLKID();
 		int tam_KID();
 		int vazia_KID();
 		int cheio_KID();

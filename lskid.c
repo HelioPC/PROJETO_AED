@@ -1,3 +1,4 @@
+#include <string.h>
 #define __ALL_TYPES__
 #define __LS_FUNC__
 #include "Declaração.h"

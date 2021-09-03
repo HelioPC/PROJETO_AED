@@ -1,3 +1,4 @@
+#include <string.h>
 #include <time.h>
 #define __ALL_TYPES__
 #define __DT_FUNC__

@@ -1,7 +1,10 @@
+#include <string.h>
 #include <locale.h>
 #define __ALL_TYPES__
+#define __LS_FUNC__
 #define __CLIK_FUNC__
 #define __DT_FUNC__
+#define __MN_FUNC__
 #include "Declaração.h"
 
 extern LISTA_KID *LKD;
@@ -55,7 +58,7 @@ void mostraKID(){
 	if(LKD->qt == 0){
 		printf("\nNada para mostrar.\n\n");
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	for(i=0; i<LKD->qt; i++){
@@ -77,5 +80,4 @@ void mostraKID(){
 	}
 	
 	_pause();
-	menuSys();
 }

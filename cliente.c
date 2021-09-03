@@ -1,11 +1,14 @@
+#include <string.h>
 #include <locale.h>
 #define __ALL_TYPES__
+#define __LL_FUNC__
+#define __LS_FUNC__
 #define __CLI_FUNC__
 #define __DT_FUNC__
+#define __MN_FUNC__
 #include "Declaração.h"
 
 extern LISTACLI *LCL;
-extern LISTAHIST *LHS;
 extern LISTA_KID *LKD;
 
 CLI iniCli(char *nome, DATA nasc, long int tel, double val, char *bi,
@@ -46,13 +49,12 @@ void mostraCLI(){
 	if(LCL == NULL || *LCL == NULL){
 		printf("\nNada para mostrar.\n");
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	for(; aux != NULL; aux = aux->prox) _mostraCLI(&aux->cliente);
 
     _pause();
-	menuSys();
 }
 
 void _mostraCLI(CLI *cl){
@@ -77,7 +79,7 @@ void mostraCLI_by_DATA(DATA d){
 	if(LCL == NULL || *LCL == NULL){
 		printf("\nNada para mostrar.\n");
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	for(; noc != NULL; noc = noc->prox){
@@ -93,7 +95,7 @@ void mostraCLI_idade(unsigned short int x, unsigned short int y){
 	if(LCL == NULL || *LCL == NULL){
 		printf("\nNada para mostrar.\n\n");
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	for(; noc != NULL; noc = noc->prox){

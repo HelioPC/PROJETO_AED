@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -21,7 +22,7 @@ int isFloat(char *s){
 		if(isdigit(s[i])) qt++;
 	}
 	
-	if(qt != strlen(s)){
+	if((long unsigned int) qt != strlen(s)){
 		if(strcountc(s, ',') == 0 && strcountc(s, '.') == 0) return 0;
 	}
 	
@@ -29,7 +30,7 @@ int isFloat(char *s){
 		s[strcspn(s, ".")] = ',';
 	}
 	
-	return qt >= strlen(s)-1;
+	return (long unsigned int) qt >= strlen(s)-1;
 }
 
 int isNome(char *s){
@@ -42,7 +43,7 @@ int isNome(char *s){
 		if(isalpha(s[i]) || isspace(s[i])) qt++;
 	}
 	
-	return qt == strlen(s);
+	return (long unsigned int) qt == strlen(s);
 }
 
 int isTel(char *s){

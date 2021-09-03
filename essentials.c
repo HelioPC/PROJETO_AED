@@ -1,5 +1,12 @@
+#include <string.h>
 #define __ALL_TYPES__
+#define __LL_FUNC__
+#define __LDL_FUNC__
+#define __LS_FUNC__
 #define __DT_FUNC__
+#define __CLI_FUNC__
+#define __CLIK_FUNC__
+#define __MN_FUNC__
 #include "Declaração.h"
 
 extern LISTACLI *LCL;
@@ -96,7 +103,7 @@ void debitar_ALL(){
 	if(LCL == NULL || *LCL == NULL){
 		printf("Nada para mostrar.\n\n");
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	for(; noc != NULL; noc=noc->prox){
@@ -105,5 +112,4 @@ void debitar_ALL(){
 	
 	printf("Foi debitado em todas as contas 1.5%%.\n\n");
 	_pause();
-	menuSys();
 }

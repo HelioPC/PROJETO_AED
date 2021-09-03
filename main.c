@@ -1,5 +1,7 @@
 #include <locale.h>
 #define __ALL_TYPES__
+#define __INI_FUNC__
+#define __MN_FUNC__
 #include "Declaração.h"
 
 LISTACLI *LCL;

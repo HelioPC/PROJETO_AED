@@ -1,7 +1,14 @@
+#include <stdio_ext.h>
+#include <string.h>
 #include <locale.h>
 #define __ALL_TYPES__
 #define __CLI_FUNC__
 #define __DT_FUNC__
+#define __AUX_FUNC__
+#define __LL_FUNC__
+#define __MN_FUNC__
+#define __LS_FUNC__
+#define __CLIK_FUNC__
 #include "Declaração.h"
 
 void abreConta(void){
@@ -17,59 +24,69 @@ void abreConta(void){
 	system(limpa);
 	printf("=======================Abertura De Conta=======================");
 	
-	printf("\nIntroduza o seu nome: ");fflush(stdin);
+	printf("\nIntroduza o seu nome: ");
 	fgets(nome, 80, stdin);
 	nome[strcspn(nome, "\n")] = '\0';
 	
 	while(!isNome(nome)){
-		printf("\nIntroduza o seu nome: ");fflush(stdin);
+		printf("\nIntroduza o seu nome: ");
+		__fpurge(stdin);
 		fgets(nome, 80, stdin);
 		nome[strcspn(nome, "\n")] = '\0';
 	}
 	
-	printf("\nIntroduza a sua data de nasc.(01/01/1970): ");fflush(stdin);
+	printf("\nIntroduza a sua data de nasc.(01/01/1970): ");
+	__fpurge(stdin);
 	fgets(data, 11, stdin);dat_nasc = strToData(data);
 	data[strcspn(data, "\n")] = '\0';
 	idade = dat_atual.a - dat_nasc.a;
 	
 	while(idade < 12){
-		printf("\nIntroduza a sua data de nasc.(01/01/1970): ");fflush(stdin);
+		printf("\nIntroduza a sua data de nasc.(01/01/1970): ");
+		__fpurge(stdin);
 		fgets(data, 11, stdin);dat_nasc = strToData(data);
 		data[strcspn(data, "\n")] = '\0';
 		idade = dat_atual.a - dat_nasc.a;
 	}
 	
 	while(!(gen == 'M' || gen == 'F')){
-		printf("\nQual o seu gênero(M/F): ");fflush(stdin);
+		printf("\nQual o seu gênero(M/F): ");
+		__fpurge(stdin);
 		gen = getchar();
 	}
 	
-	printf("\nIntroduza o seu número de tel.: ");fflush(stdin);
+	printf("\nIntroduza o seu número de tel.: ");
+	__fpurge(stdin);
 	fgets(telStr, 10, stdin);
 	
 	while(!isTel(telStr)){
-		printf("\nIntroduza o seu número de tel.: ");fflush(stdin);
+		printf("\nIntroduza o seu número de tel.: ");
+		__fpurge(stdin);
 		fgets(telStr, 10, stdin);
 	}
 	
 	tel = atoi(telStr);
 	
-	printf("\nIntroduza o número do B.I: ");fflush(stdin);
+	printf("\nIntroduza o número do B.I: ");
+	__fpurge(stdin);
 	fgets(n_bi, 15, stdin);
 	
 	while(!isBI(n_bi)){
-		printf("\nIntroduza o número do B.I: ");fflush(stdin);
+		printf("\nIntroduza o número do B.I: ");
+		__fpurge(stdin);
 		fgets(n_bi, 15, stdin);
 	}
 	
 	if(idade > 11 && idade < 21){
 		while(valor < 6895.0){
-			printf("\nIntroduza o valor: ");fflush(stdin);
+			printf("\nIntroduza o valor: ");
+			__fpurge(stdin);
 			fgets(valStr, 14, stdin);
 			valStr[strcspn(valStr, "\n")] = '\0';
 			
 			while(!isFloat(valStr)){
-				printf("\nIntroduza o valor: ");fflush(stdin);
+				printf("\nIntroduza o valor: ");
+				__fpurge(stdin);
 				fgets(valStr, 14, stdin);
 				valStr[strcspn(valStr, "\n")] = '\0';
 			}
@@ -79,12 +96,14 @@ void abreConta(void){
 	}
 	else if(idade > 20 && idade < 35){
 		while(valor < 10000.0){
-			printf("\nIntroduza o valor: ");fflush(stdin);
+			printf("\nIntroduza o valor: ");
+			__fpurge(stdin);
 			fgets(valStr, 14, stdin);
 			valStr[strcspn(valStr, "\n")] = '\0';
 			
 			while(!isFloat(valStr)){
-				printf("\nIntroduza o valor: ");fflush(stdin);
+				printf("\nIntroduza o valor: ");
+				__fpurge(stdin);
 				fgets(valStr, 14, stdin);
 				valStr[strcspn(valStr, "\n")] = '\0';
 			}
@@ -93,12 +112,14 @@ void abreConta(void){
 		}
 	}else{
 		while(valor < 15000.0){
-			printf("\n\nIntroduza o valor: ");fflush(stdin);
+			printf("\n\nIntroduza o valor: ");
+			__fpurge(stdin);
 			fgets(valStr, 14, stdin);
 			valStr[strcspn(valStr, "\n")] = '\0';
 			
 			while(!isFloat(valStr)){
-				printf("\n\nIntroduza o valor: ");fflush(stdin);
+				printf("\n\nIntroduza o valor: ");
+				__fpurge(stdin);
 				fgets(valStr, 14, stdin);
 				valStr[strcspn(valStr, "\n")] = '\0';
 			}
@@ -107,20 +128,19 @@ void abreConta(void){
 		}
 	}
 	
-	sprintf(n_conta, "%s+%d", BANO, tel);
+	sprintf(n_conta, "%s+%ld", BANO, tel);
 	
 	if(is_CLI_in(n_conta) || is_CLI_in3(n_bi)){
 		printf("\n\nA conta %s já foi criada ou o cliente %s já existe!\n\n",
 		n_conta, n_bi);
 		_pause();
-		menuSys();
+		return;
 	}
 	
-	inserirF(iniCli(nome, dat_nasc, tel, valor, n_bi, n_conta, gen,
+	inserirK(iniCli(nome, dat_nasc, tel, valor, n_bi, n_conta, gen,
 	criaData()));
 	printf("\n\nAbertura de conta efetuada com sucesso...\n\n");
 	_pause();
-	menuSys();
 }
 
 void abreContaKid(CLI *cl){
@@ -138,30 +158,30 @@ void abreContaKid(CLI *cl){
 	system(limpa);
 	printf("=====================Abertura De Conta Kid=====================");
 	
-	printf("\nIntroduza o seu nome: ");fflush(stdin);
+	printf("\nIntroduza o seu nome: ");__fpurge(stdin);
 	fgets(nome, 80, stdin);
 	nome[strcspn(nome, "\n")] = '\0';
 	
 	while(!isNome(nome)){
-		printf("\nIntroduza o seu nome: ");fflush(stdin);
+		printf("\nIntroduza o seu nome: ");__fpurge(stdin);
 		fgets(nome, 80, stdin);
 		nome[strcspn(nome, "\n")] = '\0';
 	}
 	
-	printf("\nIntroduza a sua data de nasc.(01/01/1970): ");fflush(stdin);
+	printf("\nIntroduza a sua data de nasc.(01/01/1970): ");__fpurge(stdin);
 	fgets(data, 11, stdin);d_nasc = strToData(data);
 	data[strcspn(data, "\n")] = '\0';
 	i = d.a - d_nasc.a;
 	
 	while(i > 11){
-		printf("\nIntroduza a sua data de nasc.(01/01/1970): ");fflush(stdin);
+		printf("\nIntroduza a sua data de nasc.(01/01/1970): ");__fpurge(stdin);
 		fgets(data, 11, stdin);d_nasc = strToData(data);
 		data[strcspn(data, "\n")] = '\0';
 		i = d.a - d_nasc.a;
 	}
 	
 	while(!(gen == 'M' || gen == 'F')){
-		printf("\nQual o seu gênero(M/F): ");fflush(stdin);
+		printf("\nQual o seu gênero(M/F): ");__fpurge(stdin);
 		gen = getchar();
 	}
 	
@@ -169,12 +189,12 @@ void abreContaKid(CLI *cl){
 	val = 20000.0;
 	cl->valor -= 20000.0;
 	
-	printf("\nIntroduza o número da cédula: ");fflush(stdin);
+	printf("\nIntroduza o número da cédula: ");__fpurge(stdin);
 	fgets(ced, 10, stdin);
 	ced[strcspn(ced, "\n")] = '\0';
 	
 	while(!isCED(ced)){
-		printf("\nIntroduza o número da cédula: ");fflush(stdin);
+		printf("\nIntroduza o número da cédula: ");__fpurge(stdin);
 		fgets(ced, 10, stdin);
 		ced[strcspn(ced, "\n")] = '\0';
 	}
@@ -182,7 +202,7 @@ void abreContaKid(CLI *cl){
 	if(is_KID_in(ced)){
 		printf("\n\nO número da cédula já está registado.\n\n");
 		_pause();
-		menuCli(cl);
+		return;
 	}
 	
 	strcpy(n_conta, cl->n_conta);
@@ -190,5 +210,4 @@ void abreContaKid(CLI *cl){
 	inserirF_KID(iniKID(nome, ced, gen, tel, val, n_conta, d_nasc, d, i));
 	printf("\n\nAbertura de conta efetuada com sucesso...\n\n");
 	_pause();
-	menuCli(cl);
 }

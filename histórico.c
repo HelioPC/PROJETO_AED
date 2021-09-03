@@ -1,3 +1,4 @@
+#include <string.h>
 #define __ALL_TYPES__
 #define __CLIK_FUNC__
 #define __DT_FUNC__
@@ -11,7 +12,7 @@ void mostraHIST_by_DATA(DATA d, CLI *cl){
 	if(*LHS == NULL){
 		printf("\nNenhum processo para mostrar.\n");
 		_pause();
-		menuHist(cl);
+		return;
 	}
 	
 	system(limpa);
@@ -26,7 +27,7 @@ void mostraHIST_by_DATA(DATA d, CLI *cl){
 	}
 	
 	_pause();
-	menuHist(cl);
+	return;
 }
 
 void mostraHIST_by_OP(CLI *cl){
@@ -36,7 +37,7 @@ void mostraHIST_by_OP(CLI *cl){
 	if(*LHS == NULL){
 		printf("\nNenhum processo para mostrar.\n");
 		_pause();
-		menuHist(cl);
+		return;
 	}
 	
 	system(limpa);
@@ -55,25 +56,25 @@ void mostraHIST_by_OP(CLI *cl){
 			if(strcmp(op, "Transferência") != 0){
 				printf("\nParâmetro inválido.\n");
 				_pause();
-				menuHist(cl);
+				return;
 			}break;
 		case 'D':
 			if(strcmp(op, "Depósito") != 0){
 				printf("\nParâmetro inválido.\n");
 				_pause();
-				menuHist(cl);
+				return;
 			}break;
 		case 'L':
 			if(strcmp(op, "Levantamento") != 0){
 				printf("\nParâmetro inválido.\n");
 				_pause();
-				menuHist(cl);
+				return;
 			}break;
 		case 'C':
 			if(strcmp(op, "Consulta") != 0){
 				printf("\nParâmetro inválido.\n");
 				_pause();
-				menuHist(cl);
+				return;
 			}break;
 	}
 	
@@ -89,5 +90,5 @@ void mostraHIST_by_OP(CLI *cl){
 	}
 	
 	_pause();
-	menuHist(cl);
+	return;
 }

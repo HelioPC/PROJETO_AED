@@ -1,6 +1,10 @@
 #include <string.h>
 #define __ALL_TYPES__
+#define __LL_FUNC__
 #define __LDL_FUNC__
+#define __CLI_FUNC__
+#define __DT_FUNC__
+#define __MN_FUNC__
 #include "Declaração.h"
 
 extern LISTACLI *LCL;
@@ -71,20 +75,20 @@ void rank_mais_act(){
 	if(*LCL == NULL || *LHS == NULL){
 		printf("\nNada para mostrar.\n");
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	if(tam() == 1){
 		_mostraCLI(&noc->cliente);
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	if(tamLH() == 1){
 		noh = *LHS;
 		_mostraCLI(getCLI(noh->h.n_conta));
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	for(a=0; noc != NULL; noc=noc->prox){
@@ -109,7 +113,6 @@ void rank_mais_act(){
 	}
 	
 	_pause();
-	menuSys();
 }
 
 void mostraHIST_by_CLI(char *n_conta){
@@ -118,7 +121,7 @@ void mostraHIST_by_CLI(char *n_conta){
 	if(*LHS == NULL || qtHIST(getCLI(n_conta))){
 		printf("\nNenhum processo para mostrar.\n");
 		_pause();
-		menuSys();
+		return;
 	}
 	
 	system(limpa);
@@ -133,5 +136,4 @@ void mostraHIST_by_CLI(char *n_conta){
 	
 	_mostraCLI(getCLI(n_conta));
 	_pause();
-	menuSys();
 }

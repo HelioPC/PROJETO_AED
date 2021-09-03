@@ -32,22 +32,21 @@ int vazia(){
 	return 0;
 }
 
-int inserirK(CLI cli, int k){
+int inserirK(CLI cli){
 	NOCli *no = (NOCli *) malloc(sizeof(NOCli));
 	NOCli *aux;
 
     if(no == NULL) return 0;
 
     aux = *LCL;
+	no->cliente = cli;
 
     while(aux != NULL && strcmp(no->cliente.nome, aux->cliente.nome) > 0){
         aux = aux->prox;
     }
 
-    if(aux != NULL) return 0;
-
-    no->prox = aux;
-    aux = no;
+    no->prox = *LCL;
+    *LCL = no;
 	
 	return 1;
 }
