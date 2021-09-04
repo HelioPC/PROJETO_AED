@@ -35,22 +35,17 @@ int vaziaLH(void){
 
 int inserirF_LH(HIST h){
 	NOHIST *noh = (NOHIST *) malloc(sizeof(NOHIST));
-	NOHIST *aux = *LHS;
 	
-	if(LHS == NULL) return 0;
+	if(LHS == NULL || noh == NULL) return 0;
 	
 	noh->h = h;
-	noh->prox = NULL;
-	
-	if(*LHS == NULL){
-		noh->ant = NULL;
-		*LHS = noh;
-	}else{
-		for(; aux->prox != NULL; aux=aux->prox);
-		
-		noh->ant = aux;
-		aux->prox = noh;
-	}
+	noh->ant = NULL;
+
+	noh->prox = *LHS;
+
+	if(*LHS != NULL) (*LHS)->ant = noh;
+
+	*LHS = noh;
 	
 	return 1;
 }
@@ -59,7 +54,7 @@ int qtHIST(CLI *cl){
 	NOHIST *aux = *LHS;
 	int qt=0;
 	
-	for(; aux->prox != NULL; aux=aux->prox){
+	for(; aux != NULL; aux=aux->prox){
 		if(strcmp(cl->n_conta, aux->h.n_conta) == 0) qt++;
 	}
 	

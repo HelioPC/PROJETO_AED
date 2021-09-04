@@ -6,6 +6,9 @@
 	#define __DEC_H__
 	#define MAX 150
 	#define BANO "BANO"
+	#define CLIFILE "636C6966696C65.dat"
+	#define HISTFILE "6869737466696C65.dat"
+	#define KIDFILE "6B696466696C65.dat"
 	
 	#ifdef __unix__
 		#define limpa "clear"
@@ -85,11 +88,9 @@
 		int tam();
 		int vazia();
 		int inserirK(CLI cli);
-		int inserirI2(LISTACLI *lc, CLI cli);
 		int removeK(char *n_conta);
 		int getCLI_pos(CLI cl);
 		int is_CLI_in(char *n_conta);
-		int is_CLI_in2(LISTACLI *lc, CLI cli);
 		int is_CLI_in3(char *n_bi);
 	#endif
 
@@ -106,11 +107,7 @@
 		int tam_KID();
 		int vazia_KID();
 		int cheio_KID();
-		int inserirI_KID(CONTA_KID ck);
 		int inserirF_KID(CONTA_KID ck);
-		int inserirK_KID(CONTA_KID ck, int k);
-		int removeI_KID();
-		int removeF_KID();
 		int removeK_KID(int k);
 		int rmKID(char *n_conta);
 		int is_KID_in(char *ced);
@@ -187,6 +184,9 @@
 		int isTel(char *s);
 		int isBI(char *s);
 		int isCED(char *s);
+		int getOption(int min, int max);
+		void load();
+		void save();
 	#endif
 	/*Fim De Outros Protótipos*/
 	

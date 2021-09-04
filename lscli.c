@@ -90,22 +90,6 @@ int is_CLI_in(char *n_conta){
 	return 0;
 }
 
-int is_CLI_in2(LISTACLI *lc, CLI cli){
-	NOCli *no;
-	if(*lc == NULL) return 0;
-	
-	no = *lc;
-	
-	while(no->prox != NULL){
-		if(strcmp(cli.n_conta, no->cliente.n_conta) == 0) return 1;
-		no = no->prox;
-	}
-	
-	if(strcmp(cli.n_conta, no->cliente.n_conta) == 0) return 1;
-	
-	return 0;
-}
-
 int is_CLI_in3(char *n_bi){
 	NOCli *no;
 	if(vazia()) return 0;
