@@ -4,11 +4,13 @@
 #define __MN_FUNC__
 #include "Declaração.h"
 
+int loaded;
 LISTACLI *LCL;
 LISTAHIST *LHS;
 LISTA_KID *LKD;
 
 int main(){
+	loaded = 0;
 	setlocale(LC_ALL, "Portuguese");
 
 	iniLCLI();

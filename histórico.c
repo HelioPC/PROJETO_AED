@@ -1,7 +1,9 @@
 #include <string.h>
 #define __ALL_TYPES__
-#define __CLIK_FUNC__
+#define __LDL_FUNC__
+#define __HST_FUNC__
 #define __DT_FUNC__
+#define __COLORS__
 #include "Declaração.h"
 
 extern LISTAHIST *LHS;
@@ -19,10 +21,7 @@ void mostraHIST_by_DATA(DATA d, CLI *cl){
 	for(; aux != NULL; aux=aux->prox){
 		if(strcmp(cl->n_conta, aux->h.n_conta) == 0 &&
 		equalsDATA(d, aux->h.data)){
-			printf("Número da conta: %s\n", cl->n_conta);
-			printf("Data da operação:");mostraData(d);
-			printf("Tipo de operação: %s\n", aux->h.tipo);
-			printf("=====================================================\n");
+			printhst(aux->h);
 		}
 	}
 	
@@ -82,13 +81,42 @@ void mostraHIST_by_OP(CLI *cl){
 	for(; aux != NULL; aux=aux->prox){
 		if(strcmp(cl->n_conta, aux->h.n_conta) == 0 &&
 		strstr(aux->h.tipo, op) != NULL){
-			printf("Número da conta: %s\n", cl->n_conta);
-			printf("Data da operação:");mostraData(aux->h.data);
-			printf("Tipo de operação: %s\n", aux->h.tipo);
-			printf("=====================================================\n");
+			printhst(aux->h);
 		}
 	}
 	
 	_pause();
 	return;
+}
+
+void mostraHIST_by_CLI(char *n_conta){
+	NOHIST *aux = *LHS;
+	
+	if(*LHS == NULL){
+		printf("\nNenhum processo para mostrar.\n");
+		_pause();
+		return;
+	}
+	
+	system(limpa);
+	for(; aux != NULL; aux=aux->prox){
+		if(strcmp(n_conta, aux->h.n_conta) == 0){
+			printhst(aux->h);
+		}
+	}
+
+	_pause();
+}
+
+void printhst(HIST h){
+	printf("Número da conta: %s\n", h.n_conta);
+	printf("Data da operação:");mostraData(h.data);
+	printf("Tipo de operação: %s\n", h.tipo);
+	#ifdef __unix__
+		puts(YELLOW_A);
+	#endif
+	printf("===================================================\n\n");
+	#ifdef __unix__
+		puts(NORM);
+	#endif
 }

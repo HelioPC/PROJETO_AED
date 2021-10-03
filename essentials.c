@@ -10,6 +10,7 @@
 #include "Declaração.h"
 
 extern LISTACLI *LCL;
+extern int loaded;
 
 int transferir(CLI *cl, double val, char *n_conta){
 	HIST h;
@@ -27,6 +28,7 @@ int transferir(CLI *cl, double val, char *n_conta){
 	sprintf(h.tipo, "Transferência de %.2lf kz de %s para %s.", val,
 	cl->nome, cl2->nome);
 	inserirF_LH(h);
+	loaded = 1;
 
 	return 1;
 }
@@ -42,6 +44,7 @@ int depositar(CLI *cl, double val){
 	strcpy(h.n_conta, cl->n_conta);
 	sprintf(h.tipo, "Depósito de %.2lf kz.", val);
 	inserirF_LH(h);
+	loaded = 1;
 	
 	return 1;
 }
@@ -59,6 +62,7 @@ void consultar(CLI *cl){
 	strcpy(h.n_conta, cl->n_conta);
 	strcpy(h.tipo, "Consulta");
 	inserirF_LH(h);
+	loaded = 1;
 }
 
 int levantar(CLI *cl, double val){
@@ -72,6 +76,7 @@ int levantar(CLI *cl, double val){
 	strcpy(h.n_conta, cl->n_conta);
 	sprintf(h.tipo, "Levantamento de %.2lf kz.", val);
 	inserirF_LH(h);
+	loaded = 1;
 	
 	return 1;
 }
@@ -92,6 +97,7 @@ int depositarKID(CLI *cl, char *ced, double val){
 	strcpy(h.n_conta, cl->n_conta);
 	sprintf(h.tipo, "Depósito em Kid de %.2lf kz.", val);
 	inserirF_LH(h);
+	loaded = 1;
 	
 	return 1;
 }

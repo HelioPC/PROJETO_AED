@@ -2,6 +2,7 @@
 #include <locale.h>
 #define __ALL_TYPES__
 #define __LL_FUNC__
+#define __LDL_FUNC__
 #define __LS_FUNC__
 #define __CLI_FUNC__
 #define __DT_FUNC__
@@ -9,6 +10,7 @@
 #include "Declaração.h"
 
 extern LISTACLI *LCL;
+extern LISTAHIST *LHS;
 extern LISTA_KID *LKD;
 
 CLI iniCli(char *nome, DATA nasc, long int tel, double val, char *bi,
@@ -156,6 +158,55 @@ int valor_menor_n(double v){
 	}
 	
 	return qt;
+}
+
+void rank_mais_act(){
+	NOCli *noc = *LCL;
+	NOHIST *noh = NULL;
+	CLI lcli[MAX], aux;
+	int i, j, a;
+	
+	if(*LCL == NULL || *LHS == NULL){
+		printf("\nNada para mostrar.\n");
+		_pause();
+		return;
+	}
+	
+	if(tam() == 1){
+		_mostraCLI(&noc->cliente);
+		_pause();
+		return;
+	}
+	
+	if(tamLH() == 1){
+		noh = *LHS;
+		_mostraCLI(getCLI(noh->h.n_conta));
+		_pause();
+		return;
+	}
+	
+	for(a=0; noc != NULL; noc=noc->prox){
+		if(qtHIST(&noc->cliente)){
+			lcli[a++] = noc->cliente;
+		}
+	}
+	
+	for(i=0; i<a; i++){
+		for(j=0; j<a; j++){
+			if(qtHIST(&lcli[i]) > qtHIST(&lcli[j])){
+				aux = lcli[j];
+				lcli[j] = lcli[i];
+				lcli[i] = aux;
+			}
+		}
+	}
+	
+	system(limpa);
+	for(i=0; i<a; i++){
+		_mostraCLI(&lcli[i]);
+	}
+	
+	_pause();
 }
 
 /*void mostraCLI_alf(){

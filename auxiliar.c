@@ -9,11 +9,13 @@
 #define __LDL_FUNC__
 #define __LS_FUNC__
 #define __DT_FUNC__
+#define __COLORS__
 #include "Declaração.h"
 
 extern LISTACLI *LCL;
 extern LISTAHIST *LHS;
 extern LISTA_KID *LKD;
+extern int loaded;
 
 int strcountc(char *s, char c){
 	int i, qt=0;
@@ -111,27 +113,64 @@ int getOption(int min, int max){
 
 	opc = min-1;
 
+	#ifdef __unix__
+		puts(NORM);
+	#endif
+
 	while(opc<min || opc>max){
 		printf("\nEscolha uma opção: ");
 
 		if(cont++ == 10) system(limpa);
+		
+		#ifdef __unix__
+			printf("%s", GREEN);
+		#endif
 
 		scanf("%d", &opc);
 		__fpurge(stdin);
 	}
 
+	#ifdef __unix__
+		puts(NORM);
+	#endif
+
 	return opc;
+}
+
+void getout(){
+	#ifdef __unix__
+		puts(GREEN_A);
+	#endif
+	printf("Saindo..."); sleep(1);
+	#ifdef __unix__
+		puts(NORM);
+	#endif
+}
+
+void pressEnter(){
+	#ifdef __unix__
+		puts(GREEN_A);
+	#endif
+	printf("\nPress enter to continue...");
+	#ifdef __unix__
+		puts(NORM);
+	#endif
+	_pause();
 }
 
 void load(){
 	FILE *fp;
 	CLI cli;
 	HIST hst;
-	CONTA_KID kd;
 
 	if(access(CLIFILE, F_OK)){
 		puts("\nFicheiros inexistentes ou incompletos");
-		_pause();
+		pressEnter();
+		return;
+	}
+
+	if(loaded){
+		puts("\n\nNão é possível carregar os dados"); pressEnter();
 		return;
 	}
 
@@ -170,7 +209,9 @@ void load(){
 		fclose(fp);
 	}
 
-	puts("Dados carregados com sucesso...");
+	loaded = 1;
+
+	puts("\n\nDados carregados com sucesso..."); pressEnter();
 }
 
 void save(){
@@ -180,11 +221,11 @@ void save(){
 
 	if(LCL == NULL || *LCL == NULL){
 		puts("Sem dados para salvar.");
-		_pause();
+		pressEnter();
 		return;
 	}
 
-	fp = fopen(CLIFILE, "w+b");
+	fp = fopen(CLIFILE, "wb");
 
 	aux = *LCL;
 
@@ -197,12 +238,12 @@ void save(){
 	fclose(fp);
 
 	if(*LHS != NULL){
-		fp = fopen(HISTFILE, "w+b");
+		fp = fopen(HISTFILE, "wb");
 
 		walk = *LHS;
 
 		while(walk != NULL){
-			if(fwrite(&walk->h, sizeof(HIST), 1, fp)) puts("Erro 68697374");
+			if(fwrite(&walk->h, sizeof(HIST), 1, fp) != 1) puts("Erro 68697374");
 			fflush(fp);
 			walk = walk->prox;
 		}
@@ -211,7 +252,7 @@ void save(){
 	}
 
 	if(LKD->qt != 0){
-		fp = fopen(KIDFILE, "w+b");
+		fp = fopen(KIDFILE, "wb");
 
 		if(fwrite(LKD->kid, sizeof(CONTA_KID), LKD->qt, fp) != (size_t)LKD->qt){
 			puts("Erro 6B6964");
@@ -221,5 +262,66 @@ void save(){
 		fclose(fp);
 	}
 
-	puts("\n\nOperação concluída..."); _pause();
+	puts("\n\nOperação concluída..."); pressEnter();
+}
+
+void readaccount(char n_conta[15]){
+	printf("Introduza o número da conta: ");
+	fgets(n_conta, 15, stdin);
+	__fpurge(stdin);
+	n_conta[strcspn(n_conta, "\n")] = '\0';
+
+	while(n_conta[0] != 'B'){
+		printf("Conta inválida!");
+		printf("\nIntroduza o número da conta: ");
+		fgets(n_conta, 15, stdin);
+		__fpurge(stdin);
+		n_conta[strcspn(n_conta, "\n")] = '\0';
+	}
+}
+
+void readname(char nome[80]){
+	do{
+		printf("\nIntroduza o seu nome: ");
+		__fpurge(stdin);
+		fgets(nome, 80, stdin);
+		nome[strcspn(nome, "\n")] = '\0';
+	}while(!isNome(nome));
+}
+
+DATA readdata(char *msg){
+	char str[11];
+	DATA d;
+
+	printf("\nIntroduza a data%s: ", msg);
+	fgets(str, 11, stdin);d = strToData(str);
+	__fpurge(stdin);
+	str[strcspn(str, "\n")] = '\0';
+	
+	while(!isData(d)){
+		printf("\nIntroduza a data%s: ", msg);
+		fgets(str, 11, stdin);d = strToData(str);
+		__fpurge(stdin);
+		str[strcspn(str, "\n")] = '\0';
+	}
+
+	return d;
+}
+
+double getvalue(){
+	char s[14];
+
+	printf("\n\nIntroduza o valor: ");
+	fgets(s, 14, stdin);
+	__fpurge(stdin);
+	s[strcspn(s, "\n")] = '\0';
+	
+	while(!isFloat(s)){
+		printf("\n\nIntroduza o valor: ");
+		fgets(s, 14, stdin);
+		__fpurge(stdin);
+		s[strcspn(s, "\n")] = '\0';
+	}
+
+	return atof(s);
 }

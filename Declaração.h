@@ -13,6 +13,20 @@
 	#ifdef __unix__
 		#define limpa "clear"
 		#define _pause() getchar()
+		#ifdef __COLORS__
+			#define NORM "\033[m"
+			#define GREEN "\033[32m"
+			#define GREEN_A "\033[38;2;0;255;0m"
+			#define YELLOW "\033[33m"
+			#define YELLOW_A "\033[38;2;255;255;0m"
+			#define BLUE "\033[36m"
+			#define BLUE_A "\033[38;2;0;0;255m"
+			#define D_BLUE "\033[34m"
+			#define PURPLE "\033[35m"
+			#define RED "\033[31m"
+			#define RED_A "\033[38;2;255;0;0m"
+			#define GREY "\033[37m"
+		#endif
 	#else
 		#include <windows.h>
 		#define limpa "cls"
@@ -166,6 +180,7 @@
 		void mostraHIST_by_DATA(DATA d, CLI *cl);
 		void mostraHIST_by_OP(CLI *cl);
 		void mostraHIST_by_CLI(char *n_conta);
+		void printhst(HIST h);
 	#endif
 	/*Fim De Protótipos De Histórico*/
 	
@@ -187,6 +202,18 @@
 		int getOption(int min, int max);
 		void load();
 		void save();
+		void pressEnter();
+		void getout();
+		void readaccount(char vec[15]);
+		DATA readdata(const char *);
+		double getvalue();
+		void readname(char vec[80]);
+	#endif
+
+	#ifdef __MSG_FUNC__
+		void goodbye();
+		void opsucess();
+		void getaccountnumber();
 	#endif
 	/*Fim De Outros Protótipos*/
 	

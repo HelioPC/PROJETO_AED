@@ -1,13 +1,8 @@
 #include <string.h>
 #define __ALL_TYPES__
-#define __LL_FUNC__
 #define __LDL_FUNC__
-#define __CLI_FUNC__
-#define __DT_FUNC__
-#define __MN_FUNC__
 #include "Declaração.h"
 
-extern LISTACLI *LCL;
 extern LISTAHIST *LHS;
 
 void iniLHIST(void){
@@ -59,76 +54,4 @@ int qtHIST(CLI *cl){
 	}
 	
 	return qt;
-}
-
-void rank_mais_act(){
-	NOCli *noc = *LCL;
-	NOHIST *noh = NULL;
-	CLI lcli[MAX], aux;
-	int i, j, a;
-	
-	if(*LCL == NULL || *LHS == NULL){
-		printf("\nNada para mostrar.\n");
-		_pause();
-		return;
-	}
-	
-	if(tam() == 1){
-		_mostraCLI(&noc->cliente);
-		_pause();
-		return;
-	}
-	
-	if(tamLH() == 1){
-		noh = *LHS;
-		_mostraCLI(getCLI(noh->h.n_conta));
-		_pause();
-		return;
-	}
-	
-	for(a=0; noc != NULL; noc=noc->prox){
-		if(qtHIST(&noc->cliente)){
-			lcli[a++] = noc->cliente;
-		}
-	}
-	
-	for(i=0; i<a; i++){
-		for(j=0; j<a; j++){
-			if(qtHIST(&lcli[i]) > qtHIST(&lcli[j])){
-				aux = lcli[j];
-				lcli[j] = lcli[i];
-				lcli[i] = aux;
-			}
-		}
-	}
-	
-	system(limpa);
-	for(i=0; i<a; i++){
-		_mostraCLI(&lcli[i]);
-	}
-	
-	_pause();
-}
-
-void mostraHIST_by_CLI(char *n_conta){
-	NOHIST *aux = *LHS;
-	
-	if(*LHS == NULL || qtHIST(getCLI(n_conta))){
-		printf("\nNenhum processo para mostrar.\n");
-		_pause();
-		return;
-	}
-	
-	system(limpa);
-	for(; aux != NULL; aux=aux->prox){
-		if(strcmp(n_conta, aux->h.n_conta) == 0){
-			printf("Número da conta: %s\n", n_conta);
-			printf("Data da operação:");mostraData(aux->h.data);
-			printf("Tipo de operação: %s\n", aux->h.tipo);
-			printf("===================================================\n\n");
-		}
-	}
-	
-	_mostraCLI(getCLI(n_conta));
-	_pause();
 }
