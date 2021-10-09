@@ -29,18 +29,24 @@ int vaziaLH(void){
 }
 
 int inserirF_LH(HIST h){
-	NOHIST *noh = (NOHIST *) malloc(sizeof(NOHIST));
+	NOHIST *aux, *noh = (NOHIST *) malloc(sizeof(NOHIST));
 	
 	if(LHS == NULL || noh == NULL) return 0;
 	
+	aux = *LHS;
+
 	noh->h = h;
-	noh->ant = NULL;
+	noh->prox = NULL;
 
-	noh->prox = *LHS;
+	if(*LHS == NULL){
+		noh->ant = NULL;
+		*LHS = noh;
+	}else{
+		while(aux->prox != NULL) aux = aux->prox;
 
-	if(*LHS != NULL) (*LHS)->ant = noh;
-
-	*LHS = noh;
+		noh->ant = aux;
+		aux->prox = noh;
+	}
 	
 	return 1;
 }

@@ -27,7 +27,7 @@ void goodbye(){
     "\n\t\t        | IIIIIIIIII |"
     "\n\t\t        \\_          _/"
     "\n\t\t          \\_      _/"
-    "\n\t\t            \\___/\n\n"
+    "\n\t\t            \\____/\n\n"
     );
 
     #ifdef __unix__
