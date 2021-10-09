@@ -40,8 +40,8 @@ int isFloat(char *s){
 		if(strcountc(s, ',') == 0 && strcountc(s, '.') == 0) return 0;
 	}
 	
-	if(strcountc(s, '.')){
-		s[strcspn(s, ".")] = ',';
+	if(strcountc(s, ',')){
+		s[strcspn(s, ",")] = '.';
 	}
 	
 	return (long unsigned int) qt >= strlen(s)-1;
