@@ -1,0 +1,72 @@
+#:kivy 2.0.0
+
+<Login>
+
+    MDFloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "assets/imgs/bgd3.jpg"
+
+        MDCard:
+            size_hint: None, None
+            size: "450dp", "450dp"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            elevation: 70
+            border_radius: 20
+            radius: [15]
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                padding: 20
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: "140dp"
+                    padding: 15
+                    Image:
+                        source: 'assets/imgs/logo.png'
+                        size_hint: None, None
+                        size: "60dp", "60dp"
+                        pos_hint: {'center_x': 0.5}
+                    Label:
+                        text: 'Welcome'
+                        opacity: .27
+                    Label:
+                        text: 'Log into your account'
+                        opacity: .8
+
+                MDSeparator:
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 10
+                    spacing: 30
+
+                    MDTextField:
+                        id: user
+                        hint_text: 'username'
+                        icon_left: 'account'
+                        size_hint_x: None
+                        width: 300
+                        font_size: 15
+                        pos_hint: {'center_x': 0.5}
+
+                    MDTextField:
+                        id: psd
+                        hint_text: 'password'
+                        icon_left: 'lock'
+                        size_hint_x: None
+                        width: 300
+                        font_size: 15
+                        password: True
+                        helper_text: "Enter your password"
+                        helper_text_mode: "on_error"
+                        pos_hint: {'center_x': 0.5}
+
+                    MDRaisedButton:
+                        text: 'Login'
+                        pos_hint: {'center_x': 0.5}
+                        on_release: root.start_screen(3)

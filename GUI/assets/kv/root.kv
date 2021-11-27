@@ -1,0 +1,125 @@
+#:kivy 2.0.0
+
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import gch kivy.utils.get_color_from_hex
+#:import StiffScrollEffect kivymd.effects.stiffscroll.StiffScrollEffect
+#:import NavigationItem navbar.NavigationItem
+#:import NavigationBar navbar.NavigationBar
+#:import RallySettingsScreen setts.RallySettingsScreen
+
+
+<Root>
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        NavigationBar:
+            id: nav_bar
+
+            NavigationItem:
+                text: "OVERVIEW"
+                icon: "chart-pie"
+
+            NavigationItem:
+                text: "ACCOUNTS"
+                icon: "currency-usd"
+
+            NavigationItem:
+                text: "BILLS"
+                icon: "currency-usd-off"
+
+            NavigationItem:
+                text: "BUDGETS"
+                icon: "shopping"
+
+            NavigationItem:
+                text: "SETTINGS"
+                icon: "cog"
+
+        ScreenManager:
+            id: rt_mng
+
+<ScrollView>
+    bar_width: 0
+    effect_cls: StiffScrollEffect
+
+
+<RallyLabel@MDLabel>
+    adaptive_height: True
+
+
+<RallyListItem>
+    size_hint_y: None
+    height: dp(60)
+
+    canvas:
+        Color:
+            rgba:
+                self.theme_cls.divider_color
+        Line:
+            points: (root.x+dp(16), root.y, root.x+self.width-dp(16)-0, root.y)
+    canvas.before:
+        Color:
+            rgba: gch("#31313b")
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    MDBoxLayout:
+        adaptive_size: True
+        padding: dp(15)
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDIcon:
+            icon: "minus-thick"
+            halign: "center"
+            pos_hint: {"center_y": .5}
+            theme_text_color: "Custom"
+            text_color: root.bar_color
+
+            canvas.before:
+                PushMatrix
+                Rotate:
+                    angle: 90
+                    origin: self.center
+            canvas.after:
+                PopMatrix
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        adaptive_height: True
+        pos_hint: {"center_x": .5, "center_y": .5}
+        spacing: dp(2)
+
+        RallyLabel:
+            text: root.text
+            font_style: "Subtitle1"
+
+        RallyLabel:
+            text: root.secondary_text
+            theme_text_color: "Hint"
+            font_style: "Button"
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: (0, 0, 0, dp(10))
+        adaptive_height: True
+
+        RallyLabel:
+            text: root.tertiary_text
+            theme_text_color: "Secondary"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            halign: "right"
+            font_style: "H3"
+            font_size: sp(20)
+
+    MDBoxLayout:
+        adaptive_size: True
+        padding: dp(15)
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDIcon:
+            icon: "chevron-right"
+            halign: "center"
+            pos_hint: {"center_y": .5}
+            theme_text_color: "Hint"

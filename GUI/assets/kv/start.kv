@@ -1,0 +1,83 @@
+#:kivy 2.0.0
+
+#: import gch kivy.utils.get_color_from_hex
+
+<Start>
+    ScrollView:
+
+        MDList:
+            id: box
+            spacing: "12dp"
+
+            AlertBox:
+
+
+<OverviewBox>
+    adaptive_height: True
+    orientation: 'vertical'
+
+    canvas.before:
+        Color:
+            rgba: gch("#35353f")
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    MDBoxLayout:
+        padding: dp(10)
+        orientation: 'vertical'
+        adaptive_height: True
+
+        RallyLabel:
+            text: root.title
+            font_style: "Body2"
+
+        RallyLabel:
+            text: root.money
+            font_style: "Money"
+
+    MDList:
+
+        RallyListItem:
+            text: root.text[0]
+            secondary_text: root.secondary_text[0]
+            tertiary_text: root.tertiary_text[0]
+            bar_color: root.bar_color[0]
+
+        RallyListItem:
+            text: root.text[1]
+            secondary_text: root.secondary_text[1]
+            tertiary_text: root.tertiary_text[1]
+            bar_color: root.bar_color[1]
+
+        RallyListItem:
+            text: root.text[2]
+            secondary_text: root.secondary_text[2]
+            tertiary_text: root.tertiary_text[2]
+            bar_color: root.bar_color[2]
+
+    RallySeeAllButton:
+        padding: dp(5)
+        adaptive_height: True
+
+        RallyLabel:
+            text: "SEE ALL"
+            halign: "center"
+            font_style: "Button"
+
+
+<AlertBox@MDBoxLayout>
+    adaptive_height: True
+    padding: dp(10)
+
+    canvas.before:
+        Color:
+            rgba: gch("#35353f")
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    RallyLabel:
+        text: "Alerts\nBeware: you've used up 90% of your shopping budget for this month."
+        font_style: "Subtitle1"
+
