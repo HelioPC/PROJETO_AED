@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -113,48 +112,34 @@ int getOption(int min, int max){
 
 	opc = min-1;
 
-	#ifdef __unix__
-		puts(NORM);
-	#endif
+	puts(NORM);
 
 	while(opc<min || opc>max){
 		printf("\nEscolha uma opção: ");
 
 		if(cont++ == 10) system(limpa);
 		
-		#ifdef __unix__
-			printf("%s", GREEN);
-		#endif
+		printf("%s", GREEN);
 
 		scanf("%d", &opc);
-		__fpurge(stdin);
+		fflush(stdin);
 	}
 
-	#ifdef __unix__
-		puts(NORM);
-	#endif
+	puts(NORM);
 
 	return opc;
 }
 
 void getout(){
-	#ifdef __unix__
-		puts(GREEN_A);
-	#endif
+	puts(GREEN_A);
 	printf("Saindo..."); sleep(1);
-	#ifdef __unix__
-		puts(NORM);
-	#endif
+	puts(NORM);
 }
 
 void pressEnter(){
-	#ifdef __unix__
-		puts(GREEN_A);
-	#endif
+	puts(GREEN_A);
 	printf("\nPress enter to continue...");
-	#ifdef __unix__
-		puts(NORM);
-	#endif
+	puts(NORM);
 	_pause();
 }
 
@@ -268,14 +253,14 @@ void save(){
 void readaccount(char n_conta[15]){
 	printf("Introduza o número da conta: ");
 	fgets(n_conta, 15, stdin);
-	__fpurge(stdin);
+	fflush(stdin);
 	n_conta[strcspn(n_conta, "\n")] = '\0';
 
 	while(n_conta[0] != 'B'){
 		printf("Conta inválida!");
 		printf("\nIntroduza o número da conta: ");
 		fgets(n_conta, 15, stdin);
-		__fpurge(stdin);
+		fflush(stdin);
 		n_conta[strcspn(n_conta, "\n")] = '\0';
 	}
 }
@@ -283,7 +268,7 @@ void readaccount(char n_conta[15]){
 void readname(char nome[80]){
 	do{
 		printf("\nIntroduza o seu nome: ");
-		__fpurge(stdin);
+		fflush(stdin);
 		fgets(nome, 80, stdin);
 		nome[strcspn(nome, "\n")] = '\0';
 	}while(!isNome(nome));
@@ -295,13 +280,13 @@ DATA readdata(char *msg){
 
 	printf("\nIntroduza a data%s: ", msg);
 	fgets(str, 11, stdin);d = strToData(str);
-	__fpurge(stdin);
+	fflush(stdin);
 	str[strcspn(str, "\n")] = '\0';
 	
 	while(!isData(d)){
 		printf("\nIntroduza a data%s: ", msg);
 		fgets(str, 11, stdin);d = strToData(str);
-		__fpurge(stdin);
+		fflush(stdin);
 		str[strcspn(str, "\n")] = '\0';
 	}
 
@@ -313,13 +298,13 @@ double getvalue(){
 
 	printf("\n\nIntroduza o valor: ");
 	fgets(s, 14, stdin);
-	__fpurge(stdin);
+	fflush(stdin);
 	s[strcspn(s, "\n")] = '\0';
 	
 	while(!isFloat(s)){
 		printf("\n\nIntroduza o valor: ");
 		fgets(s, 14, stdin);
-		__fpurge(stdin);
+		fflush(stdin);
 		s[strcspn(s, "\n")] = '\0';
 	}
 

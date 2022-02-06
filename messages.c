@@ -1,15 +1,11 @@
 #include <stdio.h>
-#ifdef __unix__
-    #define __COLORS__
-#endif
+#define __COLORS__
 #include "Declaração.h"
 
 void goodbye(){
     system(limpa);
 
-    #ifdef __unix__
-        printf("%s", RED_A);
-    #endif
+    printf("%s", RED_A);
 
     printf(
     "\t\t         ____________"
@@ -30,14 +26,10 @@ void goodbye(){
     "\n\t\t            \\____/\n\n"
     );
 
-    #ifdef __unix__
-        printf("%s", GREEN_A);
-    #endif
+    printf("%s", GREEN_A);
     printf("\t\t\tSee you next time.\n");
     printf("\n\t\tBANCO BANO COPYRIGHT 2021-2022");
-    #ifdef __unix__
-        printf("%s", NORM);
-    #endif
+    printf("%s", NORM);
 }
 
 void opsucess(){

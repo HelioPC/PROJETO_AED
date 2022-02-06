@@ -1,4 +1,3 @@
-#include <stdio_ext.h>
 #include <string.h>
 #include <unistd.h>
 #define __ALL_TYPES__
@@ -24,18 +23,12 @@ void menu(void){
 	
 	while(1){
 		system(limpa);
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("=======================BANCO BANO=======================");
-		#ifdef __unix__
-			puts(NORM);
-		#endif
+		puts(NORM);
 		printf("\n\t1- Cliente\n\t2- Sistema\n\t3- Salvar\n\t4- Carregar\n\t5"
 		"- Sair\n");
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("========================================================\n");
 
 		switch(getOption(1, 5)){
@@ -77,20 +70,14 @@ void menuCli(CLI *cl){
 	
 	while(1){
 		system(limpa);
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("==================BANCO BANO (Cliente)==================");
-		#ifdef __unix__
-			puts(NORM);
-		#endif
+		puts(NORM);
 		printf("\n\t1- Transferir\n\t2- Depositar\n\t3- Consultar");
 		printf("\n\t4- Levantar\n\t5- Depositar Em Kid");
 		printf("\n\t6- Criar Conta Em Kid\n\t7- Histórico De Operações");
 		printf("\n\t8- Voltar\n");
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("========================================================\n");
 
 		switch(getOption(1, 8)){
@@ -129,7 +116,7 @@ void menuCli(CLI *cl){
 					do{
 						printf("\nIntroduza o número da cédula: ");
 						fgets(ced, 10, stdin);
-						__fpurge(stdin);
+						fflush(stdin);
 						ced[strcspn(ced, "\n")] = '\0';
 					}while(!isCED(ced) || !is_KID_in(ced));
 					
@@ -221,13 +208,9 @@ void menuSys(void){
 	
 	while(1){
 		system(limpa);
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("=====================BANCO BANO (Sistema)=====================");
-		#ifdef __unix__
-			puts(NORM);
-		#endif
+		puts(NORM);
 		printf("\n\t1- Registar Cliente.\n");
 		printf("\t2- Ver a quantidade de Contas existentes.\n");
 		printf("\t3- Ver a quantidade de contas kids existentes.\n");
@@ -244,9 +227,7 @@ void menuSys(void){
 		printf("\t14- Listar os Clientes em ordem alfabética.\n");
 		printf("\t15- Listar as informações dos Clientes Kid.\n");
 		printf("\t16- Voltar\n");
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("=============================================================\n");
 		
 		switch(getOption(1, 16)){
@@ -280,12 +261,12 @@ void menuSys(void){
 				
 				printf("\nIntroduza o n: ");
 				scanf("%hu", &n);
-				__fpurge(stdin);
+				fflush(stdin);
 				while(n > MAX-1 || n < 1){
 					printf("\nValor de n é inválido!\n");
 					printf("\nIntroduza o n: ");
 					scanf("%hu", &n);
-					__fpurge(stdin);
+					fflush(stdin);
 				}
 				cli_n_KID(n);
 				pressEnter();
@@ -341,11 +322,11 @@ void menuSys(void){
 				while(x<12 && y<12 && x >= y){
 					printf("\nIntroduza o 1º intervalo: ");
 					scanf("%hu", &x);
-					__fpurge(stdin);
+					fflush(stdin);
 
 					printf("\nIntroduza o 2º intervalo: ");				
 					scanf("%hu", &y);
-					__fpurge(stdin);
+					fflush(stdin);
 				}
 				
 				mostraCLI_idade(x, y);
@@ -422,20 +403,14 @@ void menuSys(void){
 void menuHist(CLI *cl){
 	while(1){
 		system(limpa);
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("====================BANCO BANO (Histórico)====================");
-		#ifdef __unix__
-			puts(NORM);
-		#endif
+		puts(NORM);
 		printf("\n\t1- Quantidade de processos.");
 		printf("\n\t2- Relatório de operações em um dada data.");
 		printf("\n\t3- Histórico por tipo de operação.");
 		printf("\n\t4- Voltar.");
-		#ifdef __unix__
-			puts(YELLOW_A);
-		#endif
+		puts(YELLOW_A);
 		printf("\n========================================================\n");
 		
 		switch(getOption(1, 4)){

@@ -1,4 +1,3 @@
-#include <stdio_ext.h>
 #include <string.h>
 #include <locale.h>
 #define __ALL_TYPES__
@@ -39,14 +38,14 @@ void abreConta(void){
 	/*GET GENRE*/
 	while(!(gen == 'M' || gen == 'F')){
 		printf("\nQual o seu gênero(M/F): ");
-		__fpurge(stdin);
+		fflush(stdin);
 		gen = getchar();
 	}
 	
 	/*GET PHONE NUMBER*/
 	do{
 		printf("\nIntroduza o seu número de tel.: ");
-		__fpurge(stdin);
+		fflush(stdin);
 		fgets(telStr, 10, stdin);
 	}while(!isTel(telStr));
 	
@@ -55,7 +54,7 @@ void abreConta(void){
 	/*GET B.I NUMBER*/
 	do{
 		printf("\nIntroduza o número do B.I: ");
-		__fpurge(stdin);
+		fflush(stdin);
 		fgets(n_bi, 15, stdin);
 	}while(!isBI(n_bi));
 	
@@ -64,7 +63,7 @@ void abreConta(void){
 		while(valor < 6895.0){
 			do{
 				printf("\nIntroduza o valor: ");
-				__fpurge(stdin);
+				fflush(stdin);
 				fgets(valStr, 14, stdin);
 				valStr[strcspn(valStr, "\n")] = '\0';
 			}while(!isFloat(valStr));
@@ -76,7 +75,7 @@ void abreConta(void){
 		while(valor < 10000.0){
 			do{
 				printf("\nIntroduza o valor: ");
-				__fpurge(stdin);
+				fflush(stdin);
 				fgets(valStr, 14, stdin);
 				valStr[strcspn(valStr, "\n")] = '\0';
 			}while(!isFloat(valStr));
@@ -87,7 +86,7 @@ void abreConta(void){
 		while(valor < 15000.0){
 			do{
 				printf("\nIntroduza o valor: ");
-				__fpurge(stdin);
+				fflush(stdin);
 				fgets(valStr, 14, stdin);
 				valStr[strcspn(valStr, "\n")] = '\0';
 			}while(!isFloat(valStr));
@@ -136,12 +135,12 @@ void abreContaKid(CLI *cl){
 	}while(i > 14);
 	
 	while(!(gen == 'M' || gen == 'F')){
-		printf("\nQual o seu gênero(M/F): ");__fpurge(stdin);
+		printf("\nQual o seu gênero(M/F): ");fflush(stdin);
 		gen = getchar();
 	}
 	
 	do{
-		printf("\nIntroduza o número da cédula: ");__fpurge(stdin);
+		printf("\nIntroduza o número da cédula: ");fflush(stdin);
 		fgets(ced, 10, stdin);
 		ced[strcspn(ced, "\n")] = '\0';
 	}while(!isCED(ced));

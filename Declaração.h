@@ -10,27 +10,21 @@
 	#define HISTFILE "6869737466696C65.dat"
 	#define KIDFILE "6B696466696C65.dat"
 	
-	#ifdef __unix__
-		#define limpa "clear"
-		#define _pause() getchar()
-		#ifdef __COLORS__
-			#define NORM "\033[m"
-			#define GREEN "\033[32m"
-			#define GREEN_A "\033[38;2;0;255;0m"
-			#define YELLOW "\033[33m"
-			#define YELLOW_A "\033[38;2;255;255;0m"
-			#define BLUE "\033[36m"
-			#define BLUE_A "\033[38;2;0;0;255m"
-			#define D_BLUE "\033[34m"
-			#define PURPLE "\033[35m"
-			#define RED "\033[31m"
-			#define RED_A "\033[38;2;255;0;0m"
-			#define GREY "\033[37m"
-		#endif
-	#else
-		#include <windows.h>
-		#define limpa "cls"
-		#define _pause() system("pause")
+	#define limpa "clear"
+	#define _pause() getchar()
+	#ifdef __COLORS__
+		#define NORM "\033[m"
+		#define GREEN "\033[32m"
+		#define GREEN_A "\033[38;2;0;255;0m"
+		#define YELLOW "\033[33m"
+		#define YELLOW_A "\033[38;2;255;255;0m"
+		#define BLUE "\033[36m"
+		#define BLUE_A "\033[38;2;0;0;255m"
+		#define D_BLUE "\033[34m"
+		#define PURPLE "\033[35m"
+		#define RED "\033[31m"
+		#define RED_A "\033[38;2;255;0;0m"
+		#define GREY "\033[37m"
 	#endif
 	
 	/*ESCREVA AQUI OS TIPOS, ESTRUTURAS, VARIÁVEIS GLOBAIS*/
